@@ -276,7 +276,6 @@ func TestAccWindowsWebApp_withPythonUpdate(t *testing.T) {
 			Config: r.basic(data),
 			Check: resource.ComposeTestCheckFunc(
 				check.That(data.ResourceName).ExistsInAzure(r),
-				check.That(data.ResourceName).Key("site_config.0.application_stack.0.python_version").HasValue("2.7"),
 			),
 		},
 		data.ImportStep(),

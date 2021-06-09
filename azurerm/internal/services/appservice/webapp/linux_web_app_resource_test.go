@@ -468,16 +468,16 @@ func TestAccLinuxWebApp_withJava11Tomcat8561(t *testing.T) {
 	})
 }
 
-func TestAccLinuxWebApp_withJava8JBOSSEAP72(t *testing.T) {
+func TestAccLinuxWebApp_withJava8JBOSSEAP73(t *testing.T) {
 	data := acceptance.BuildTestData(t, "azurerm_linux_web_app", "test")
 	r := LinuxWebAppResource{}
 
 	data.ResourceTest(t, r, []resource.TestStep{
 		{
-			Config: r.java(data, "jre8", "JBOSSEAP", "7.2"),
+			Config: r.java(data, "java8", "JBOSSEAP", "7.3"),
 			Check: resource.ComposeTestCheckFunc(
 				check.That(data.ResourceName).ExistsInAzure(r),
-				check.That(data.ResourceName).Key("site_config.0.linux_fx_version").HasValue("JBOSSEAP|7.2-jre8"),
+				check.That(data.ResourceName).Key("site_config.0.linux_fx_version").HasValue("JBOSSEAP|7.3-java8"),
 			),
 		},
 		data.ImportStep(),
