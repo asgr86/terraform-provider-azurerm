@@ -960,6 +960,7 @@ func autoHealTriggerSchemaWindows() *pluginsdk.Schema {
 				"private_memory_kb": {
 					Type:         pluginsdk.TypeInt,
 					Optional:     true,
+					Computed:     true,
 					ValidateFunc: validation.IntBetween(102400, 13631488),
 				},
 

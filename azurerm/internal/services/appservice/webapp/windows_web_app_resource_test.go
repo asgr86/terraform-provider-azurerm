@@ -276,7 +276,7 @@ func TestAccWindowsWebApp_withPythonUpdate(t *testing.T) {
 			Config: r.basic(data),
 			Check: resource.ComposeTestCheckFunc(
 				check.That(data.ResourceName).ExistsInAzure(r),
-				check.That(data.ResourceName).Key("site_config.0.application_stack.0.python_version").HasValue(""),
+				check.That(data.ResourceName).Key("site_config.0.application_stack.0.python_version").HasValue("2.7"),
 			),
 		},
 		data.ImportStep(),
@@ -685,9 +685,11 @@ resource "azurerm_windows_web_app" "test" {
 
     auto_heal_setting {
       trigger {
-        status_code = "500"
-        count       = 10
-        interval    = "00:01:00"
+        status_code {
+          status_code_range = "500"
+          interval          = "00:01:00"
+          count             = 10
+        }
       }
 
       action {
