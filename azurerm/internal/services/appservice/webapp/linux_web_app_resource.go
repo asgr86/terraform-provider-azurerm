@@ -55,8 +55,7 @@ var _ sdk.Resource = LinuxWebAppResource{}
 var _ sdk.ResourceWithUpdate = LinuxWebAppResource{}
 
 // TODO - Feature: Deployments (Preview)?
-// TODO - Feature: App Insights?
-// TODO - Feature: Auto healing?
+// TODO - Feature: App Insights? - Part of site_settings map
 
 func (r LinuxWebAppResource) Arguments() map[string]*pluginsdk.Schema {
 	return map[string]*pluginsdk.Schema{

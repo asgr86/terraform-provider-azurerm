@@ -515,7 +515,6 @@ func TestAccLinuxWebApp_withAutoHealRules(t *testing.T) {
 			),
 		},
 	})
-
 }
 
 // Exists func
@@ -782,7 +781,7 @@ resource "azurerm_linux_web_app" "test" {
       }
 
       action {
-        action_type = "Recycle"
+        action_type                    = "Recycle"
         minimum_process_execution_time = "00:05:00"
       }
     }
@@ -816,6 +815,7 @@ resource "azurerm_app_service_plan" "test" {
 `, data.RandomInteger, data.Locations.Primary, data.RandomInteger)
 }
 
+// nolint: unused
 func (r LinuxWebAppResource) templateWithStorageAccount(data acceptance.TestData) string {
 	return fmt.Sprintf(`
 

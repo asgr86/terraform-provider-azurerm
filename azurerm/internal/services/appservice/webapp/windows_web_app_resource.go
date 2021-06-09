@@ -56,7 +56,6 @@ var _ sdk.ResourceWithUpdate = WindowsWebAppResource{}
 
 // TODO - Feature: Deployments (Preview)?
 // TODO - Feature: App Insights?
-// TODO - Feature: Auto healing?
 
 func (r WindowsWebAppResource) Arguments() map[string]*pluginsdk.Schema {
 	return map[string]*pluginsdk.Schema{

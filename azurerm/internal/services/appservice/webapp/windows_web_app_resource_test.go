@@ -503,7 +503,7 @@ resource "azurerm_windows_web_app" "test" {
 
   site_config {
     virtual_application {
-      virtual_path = "/"
+      virtual_path  = "/"
       physical_path = "site\\wwwroot"
 
       virtual_directory {
@@ -681,20 +681,20 @@ resource "azurerm_windows_web_app" "test" {
     }
 
     // auto_swap_slot_name = // TODO
-      auto_heal = true
+    auto_heal = true
 
-	  auto_heal_setting {
-		trigger {
-		  status_code = "500"
-		  count       = 10
-		  interval    = "00:01:00"
-		}
-	
-		action {
-		  action_type = "Recycle"
-		  minimum_process_execution_time = "00:05:00"
-		}
-	  }
+    auto_heal_setting {
+      trigger {
+        status_code = "500"
+        count       = 10
+        interval    = "00:01:00"
+      }
+
+      action {
+        action_type                    = "Recycle"
+        minimum_process_execution_time = "00:05:00"
+      }
+    }
   }
 
   storage_account {
@@ -1129,7 +1129,7 @@ resource "azurerm_windows_web_app" "test" {
       }
 
       action {
-        action_type = "Recycle"
+        action_type                    = "Recycle"
         minimum_process_execution_time = "00:05:00"
       }
     }

@@ -3,6 +3,7 @@ package appservice
 import (
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/features"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/sdk"
+	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/services/appservice/sourcecontrol"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/services/appservice/webapp"
 )
 
@@ -29,6 +30,7 @@ func (r Registration) DataSources() []sdk.DataSource {
 func (r Registration) Resources() []sdk.Resource {
 	if features.ThreePointOh() {
 		return []sdk.Resource{
+			sourcecontrol.AppServiceSourceControlResource{},
 			webapp.WindowsWebAppResource{},
 			webapp.LinuxWebAppResource{},
 		}

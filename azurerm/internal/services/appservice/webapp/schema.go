@@ -2782,13 +2782,6 @@ func flattenAutoHealSettingsLinux(autoHealRules *web.AutoHealRules) []AutoHealSe
 	// Actions
 	if autoHealRules.Actions != nil {
 		actions := *autoHealRules.Actions
-		customActions := make([]AutoHealCustomAction, 0)
-		if actions.CustomAction != nil {
-			customActions = append(customActions, AutoHealCustomAction{
-				Executable: utils.NormalizeNilableString(actions.CustomAction.Exe),
-				Parameters: utils.NormalizeNilableString(actions.CustomAction.Parameters),
-			})
-		}
 
 		resultActions = AutoHealActionLinux{
 			ActionType:         string(actions.ActionType),
