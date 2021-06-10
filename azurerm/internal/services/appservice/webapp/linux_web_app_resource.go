@@ -49,6 +49,7 @@ type LinuxWebAppModel struct {
 	PossibleOutboundIPAddresses   string                   `tfschema:"possible_outbound_ip_addresses"`
 	PossibleOutboundIPAddressList []string                 `tfschema:"possible_outbound_ip_address_list"`
 	SiteCredentials               []helpers.SiteCredential `tfschema:"site_credential"`
+	// TODO Tags!
 }
 
 var _ sdk.Resource = LinuxWebAppResource{}
