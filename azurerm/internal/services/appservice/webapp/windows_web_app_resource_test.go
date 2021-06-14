@@ -924,7 +924,7 @@ resource "azurerm_windows_web_app" "test" {
   }
 }
 
-`, r.premiumPlanContainerTemplate(data), data.RandomInteger, "mcr.microsoft.com", "azure-app-service/samples/aspnethelloworld", "latest")
+`, r.premiumV3PlanContainerTemplate(data), data.RandomInteger, "mcr.microsoft.com", "azure-app-service/samples/aspnethelloworld", "latest")
 }
 
 func (r WindowsWebAppResource) node(data acceptance.TestData, nodeVersion string) string {
@@ -1153,13 +1153,13 @@ resource "azurerm_service_plan" "test" {
   name                = "acctestASP-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  sku_name            = "B1"
+  sku_name            = "S1"
 
 }
 `, data.RandomInteger, data.Locations.Primary, data.RandomInteger)
 }
 
-func (WindowsWebAppResource) premiumPlanContainerTemplate(data acceptance.TestData) string {
+func (WindowsWebAppResource) premiumV3PlanContainerTemplate(data acceptance.TestData) string {
 	return fmt.Sprintf(`
 
 resource "azurerm_resource_group" "test" {
