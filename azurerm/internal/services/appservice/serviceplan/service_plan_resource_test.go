@@ -73,7 +73,6 @@ provider "azurerm" {
   features {}
 }
 
-
 resource "azurerm_resource_group" "test" {
   name     = "acctestRG-SP-%[1]d"
   location = "%s"
@@ -96,7 +95,7 @@ resource "azurerm_service_plan" "test" {
 func (r ServicePlanResource) requiresImport(data acceptance.TestData) string {
 	return fmt.Sprintf(`
 
-%s 
+%s
 
 resource "azurerm_service_plan" "import" {
   name                = azurerm_service_plan.test.name
