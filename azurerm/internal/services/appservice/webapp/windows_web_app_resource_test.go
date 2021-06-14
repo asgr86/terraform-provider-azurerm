@@ -481,7 +481,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 }
 `, r.baseTemplate(data), data.RandomInteger)
 }
@@ -498,7 +498,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     virtual_application {
@@ -542,7 +542,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   logs {
     detailed_error_messages = %t
@@ -563,7 +563,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   app_settings = {
     foo = "bar"
@@ -726,7 +726,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   app_settings = {
     foo    = "bar"
@@ -882,7 +882,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     application_stack {
@@ -906,7 +906,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   app_settings = {
     "DOCKER_REGISTRY_SERVER_URL"          = "https://mcr.microsoft.com"
@@ -924,7 +924,7 @@ resource "azurerm_windows_web_app" "test" {
   }
 }
 
-`, r.premiumPlanTemplate(data), data.RandomInteger, "mcr.microsoft.com", "azure-app-service/samples/aspnethelloworld", "latest")
+`, r.premiumPlanContainerTemplate(data), data.RandomInteger, "mcr.microsoft.com", "azure-app-service/samples/aspnethelloworld", "latest")
 }
 
 func (r WindowsWebAppResource) node(data acceptance.TestData, nodeVersion string) string {
@@ -939,7 +939,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     application_stack {
@@ -964,7 +964,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     application_stack {
@@ -989,7 +989,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     application_stack {
@@ -1023,7 +1023,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     application_stack {
@@ -1050,7 +1050,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     application_stack {
@@ -1079,7 +1079,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   logs {
     application_logs {
@@ -1115,7 +1115,7 @@ resource "azurerm_windows_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     auto_heal = true
@@ -1149,21 +1149,17 @@ resource "azurerm_resource_group" "test" {
   location = "%s"
 }
 
-resource "azurerm_app_service_plan" "test" {
+resource "azurerm_service_plan" "test" {
   name                = "acctestASP-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  kind                = "Windows"
+  sku_name            = "B1"
 
-  sku {
-    tier = "Standard"
-    size = "S1"
-  }
 }
 `, data.RandomInteger, data.Locations.Primary, data.RandomInteger)
 }
 
-func (WindowsWebAppResource) premiumPlanTemplate(data acceptance.TestData) string {
+func (WindowsWebAppResource) premiumPlanContainerTemplate(data acceptance.TestData) string {
 	return fmt.Sprintf(`
 
 resource "azurerm_resource_group" "test" {
@@ -1171,17 +1167,12 @@ resource "azurerm_resource_group" "test" {
   location = "%s"
 }
 
-resource "azurerm_app_service_plan" "test" {
+resource "azurerm_service_plan" "test" {
   name                = "acctestASP-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  kind                = "Windows"
-  is_xenon            = true // TODO - this is deprecated, use is_hyperv instead for new resource
-
-  sku {
-    tier = "PremiumV3"
-    size = "P1v3"
-  }
+  sku_name            = "P1v3"
+  os_type             = "WindowsContainer"
 }
 `, data.RandomInteger, data.Locations.Primary, data.RandomInteger)
 }

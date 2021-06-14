@@ -3,6 +3,7 @@ package appservice
 import (
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/features"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/sdk"
+	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/services/appservice/serviceplan"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/services/appservice/sourcecontrol"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/services/appservice/webapp"
 )
@@ -33,6 +34,7 @@ func (r Registration) Resources() []sdk.Resource {
 			sourcecontrol.AppServiceSourceControlResource{},
 			webapp.WindowsWebAppResource{},
 			webapp.LinuxWebAppResource{},
+			serviceplan.AppServicePlanResource{},
 		}
 	}
 	return []sdk.Resource{}

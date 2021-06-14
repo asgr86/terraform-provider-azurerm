@@ -552,7 +552,7 @@ resource "azurerm_linux_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 }
 `, r.baseTemplate(data), data.RandomInteger)
 }
@@ -569,7 +569,7 @@ resource "azurerm_linux_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     load_balancing_mode = "%s"
@@ -590,7 +590,7 @@ resource "azurerm_linux_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   logs {
     detailed_error_messages = %t
@@ -611,7 +611,7 @@ resource "azurerm_linux_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     application_stack {
@@ -635,7 +635,7 @@ resource "azurerm_linux_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     application_stack {
@@ -659,7 +659,7 @@ resource "azurerm_linux_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     application_stack {
@@ -683,7 +683,7 @@ resource "azurerm_linux_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     application_stack {
@@ -707,7 +707,7 @@ resource "azurerm_linux_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     application_stack {
@@ -733,7 +733,7 @@ resource "azurerm_linux_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   app_settings = {
     "DOCKER_REGISTRY_SERVER_URL"          = "https://mcr.microsoft.com"
@@ -766,7 +766,7 @@ resource "azurerm_linux_web_app" "test" {
   name                = "acctestWA-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  service_plan_id     = azurerm_app_service_plan.test.id
+  service_plan_id     = azurerm_service_plan.test.id
 
   site_config {
     auto_heal = true
@@ -800,17 +800,12 @@ resource "azurerm_resource_group" "test" {
   location = "%s"
 }
 
-resource "azurerm_app_service_plan" "test" {
+resource "azurerm_service_plan" "test" {
   name                = "acctestASP-%d"
   location            = azurerm_resource_group.test.location
   resource_group_name = azurerm_resource_group.test.name
-  kind                = "Linux"
-  reserved            = true
-
-  sku {
-    tier = "Standard"
-    size = "S1"
-  }
+  os_type             = "Linux"
+  sku_name            = "B1"
 }
 `, data.RandomInteger, data.Locations.Primary, data.RandomInteger)
 }
