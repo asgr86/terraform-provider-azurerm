@@ -31,6 +31,21 @@ func TestAccServicePlan_basic(t *testing.T) {
 	})
 }
 
+func TestAccServicePlan_requiresImport(t *testing.T) {
+	data := acceptance.BuildTestData(t, "azurerm_service_plan", "test")
+	r := ServicePlanResource{}
+
+	data.ResourceTest(t, r, []resource.TestStep{
+		{
+			Config: r.basic(data),
+			Check: resource.ComposeTestCheckFunc(
+				check.That(data.ResourceName).ExistsInAzure(r),
+			),
+		},
+		data.RequiresImportErrorStep(r.requiresImport),
+	})
+}
+
 func (r ServicePlanResource) Exists(ctx context.Context, client *clients.Client, state *pluginsdk.InstanceState) (*bool, error) {
 	id, err := parse.ServicePlanID(state.ID)
 	if err != nil {
@@ -76,4 +91,18 @@ resource "azurerm_service_plan" "test" {
   }
 }
 `, data.RandomInteger, data.Locations.Primary)
+}
+
+func (r ServicePlanResource) requiresImport(data acceptance.TestData) string {
+	return fmt.Sprintf(`
+
+%s 
+
+resource "azurerm_service_plan" "import" {
+  name                = azurerm_service_plan.test.name
+  resource_group_name = azurerm_service_plan.test.resource_group_name
+  location            = azurerm_service_plan.test.location
+  sku_name            = azurerm_service_plan.test.sku_name
+}
+`, r.basic(data))
 }

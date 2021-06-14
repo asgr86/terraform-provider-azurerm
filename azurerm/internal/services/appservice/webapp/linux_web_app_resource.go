@@ -40,7 +40,7 @@ type LinuxWebAppModel struct {
 	SiteConfig                    []SiteConfigLinux        `tfschema:"site_config"`
 	StorageAccounts               []StorageAccount         `tfschema:"storage_account"`
 	ConnectionStrings             []ConnectionString       `tfschema:"connection_string"`
-	Tags                          map[string]interface{}   `tfschema:"tags"`
+	Tags                          map[string]string        `tfschema:"tags"`
 	CustomDomainVerificationId    string                   `tfschema:"custom_domain_verification_id"`
 	DefaultHostname               string                   `tfschema:"default_hostname"`
 	Kind                          string                   `tfschema:"kind"`
@@ -49,7 +49,6 @@ type LinuxWebAppModel struct {
 	PossibleOutboundIPAddresses   string                   `tfschema:"possible_outbound_ip_addresses"`
 	PossibleOutboundIPAddressList []string                 `tfschema:"possible_outbound_ip_address_list"`
 	SiteCredentials               []helpers.SiteCredential `tfschema:"site_credential"`
-	// TODO Tags!
 }
 
 var _ sdk.Resource = LinuxWebAppResource{}
@@ -263,7 +262,7 @@ func (r LinuxWebAppResource) Create() sdk.ResourceFunc {
 
 			siteEnvelope := web.Site{
 				Location: utils.String(webApp.Location),
-				Tags:     tags.Expand(webApp.Tags),
+				Tags:     tags.FromTypedObject(webApp.Tags),
 				SiteProperties: &web.SiteProperties{
 					ServerFarmID:          utils.String(webApp.ServicePlanId),
 					Enabled:               utils.Bool(webApp.Enabled),
@@ -418,7 +417,7 @@ func (r LinuxWebAppResource) Read() sdk.ResourceFunc {
 				ResourceGroup: id.ResourceGroup,
 				Location:      location.NormalizeNilable(webApp.Location),
 				AppSettings:   flattenAppSettings(appSettings),
-				Tags:          tags.Flatten(webApp.Tags),
+				Tags:          tags.ToTypedObject(webApp.Tags),
 			}
 
 			webAppProps := webApp.SiteProperties

@@ -32,6 +32,21 @@ func TestAccLinuxWebApp_basic(t *testing.T) {
 	})
 }
 
+func TestAccLinuxWebApp_requiresImport(t *testing.T) {
+	data := acceptance.BuildTestData(t, "azurerm_linux_web_app", "test")
+	r := LinuxWebAppResource{}
+
+	data.ResourceTest(t, r, []resource.TestStep{
+		{
+			Config: r.basic(data),
+			Check: resource.ComposeTestCheckFunc(
+				check.That(data.ResourceName).ExistsInAzure(r),
+			),
+		},
+		data.RequiresImportErrorStep(r.requiresImport),
+	})
+}
+
 func TestAccLinuxWebApp_detailedErrorLogging(t *testing.T) {
 	data := acceptance.BuildTestData(t, "azurerm_linux_web_app", "test")
 	r := LinuxWebAppResource{}
@@ -555,6 +570,20 @@ resource "azurerm_linux_web_app" "test" {
   service_plan_id     = azurerm_service_plan.test.id
 }
 `, r.baseTemplate(data), data.RandomInteger)
+}
+
+func (r LinuxWebAppResource) requiresImport(data acceptance.TestData) string {
+	return fmt.Sprintf(`
+
+%s
+
+resource "azurerm_linux_web_app" "import" {
+  name                = azurerm_linux_web_app.test.name
+  location            = azurerm_linux_web_app.test.location
+  resource_group_name = azurerm_linux_web_app.test.resource_group_name
+  service_plan_id     = azurerm_linux_web_app.test.service_plan_id
+}
+`, r.basic(data))
 }
 
 func (r LinuxWebAppResource) loadBalancing(data acceptance.TestData, loadBalancingMode string) string {

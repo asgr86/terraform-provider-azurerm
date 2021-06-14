@@ -708,7 +708,8 @@ resource "azurerm_windows_web_app" "test" {
   }
 
   tags = {
-    foo = "bar"
+    Environment = "AccTest"
+    foo         = "bar"
   }
 }
 `, r.templateWithStorageAccount(data), data.RandomInteger, data.Client().TenantID)
